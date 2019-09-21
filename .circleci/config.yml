@@ -4,7 +4,17 @@
 #
 version: 2
 jobs:
+  deploy:
+    docker:
+      - image: buildpack-deps:trusty
+    steps:
+      - checkout
+      - run:
+          name: Deploy Master to Heroku
+          command: |
+            git push https://heroku:$fc4fff86-fe15-4a50-accf-80ed8f393636@git.heroku.com/$pdsw-circleci-demo.git master
   build:
+  
     docker:
       # specify the version you desire here
       - image: circleci/openjdk:8-jdk
@@ -22,6 +32,7 @@ jobs:
 
     steps:
       - checkout
+ 
 
       # Download and cache dependencies
       - restore_cache:
